@@ -1,0 +1,23 @@
+Copyright (c) 2026 Avante
+
+Todos os direitos reservados.
+
+Este software e a documentação associada ("Software") são de propriedade
+exclusiva dos autores do projeto Avante. Nenhuma parte deste repositório
+pode ser copiada, distribuída, modificada ou utilizada para fins comerciais
+sem autorização prévia por escrito dos detentores dos direitos.
+
+---
+
+NOTA: esta é uma licença proprietária padrão, usada como ponto de partida
+enquanto o produto está em fase de MVP fechado. Se no futuro o projeto
+adotar código aberto (parcial ou total), substitua este arquivo por uma
+licença adequada, por exemplo:
+
+- MIT License — permissiva, boa para bibliotecas e componentes reutilizáveis.
+- Apache 2.0 — permissiva, com cláusula explícita de patentes.
+- AGPL-3.0 — copyleft forte, exige que forks públicos também sejam abertos.
+
+Para um produto comercial como o Avante, o mais comum é manter o núcleo
+proprietário e, se fizer sentido, abrir apenas bibliotecas internas
+(ex: design system) sob MIT.

@@ -1,0 +1,405 @@
+:root {
+  /* ---------- Cor (paleta oficial da marca Avante) ---------- */
+  --blue: #005bff;
+  --blue-dark: #0047cc;
+  --blue-light: #4fc3ff;
+  --blue-50: #eaf3ff;
+  --blue-100: #cfe4ff;
+  --white: #ffffff;
+  --mist: #f7f9fc;
+  --line: #e3e7ef;
+  --slate: #55607a;
+  --ink: #0a1d3d;
+  --green: #22c55e;
+  --green-50: #eafbf1;
+  --yellow: #ffc107;
+  --yellow-50: #fff8e1;
+  --red: #dc2626;
+  --red-50: #fef2f2;
+
+  /* ---------- Tipografia ---------- */
+  --font-sans: var(--inter-font), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--plex-mono-font), ui-monospace, 'SFMono-Regular', monospace;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 28px;
+  --text-2xl: 36px;
+
+  /* ---------- Espaço / forma ---------- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.06);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--mist);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+::selection {
+  background: var(--blue-100);
+  color: var(--blue-dark);
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--ink);
+}
+
+p {
+  margin: 0;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Eyebrow / rótulo estrutural ---------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+/* ---------- Cartões ---------- */
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.card--interactive {
+  cursor: pointer;
+}
+.card--interactive:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md), 0 0 24px rgba(0, 91, 255, 0.14);
+  border-color: var(--blue-100);
+}
+
+.card--muted {
+  background: var(--mist);
+  border-color: var(--line);
+}
+
+/* ---------- Botões ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: var(--radius-full);
+  padding: 13px 22px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), background 0.22s var(--ease);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: var(--blue);
+  color: var(--white);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+.btn-primary:hover {
+  background: var(--blue-dark);
+  box-shadow: 0 10px 26px rgba(37, 99, 235, 0.34);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+.btn-secondary:hover {
+  background: var(--mist);
+  border-color: var(--blue-100);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--slate);
+  padding: 10px 14px;
+}
+.btn-ghost:hover {
+  color: var(--ink);
+}
+
+/* ---------- Campos ---------- */
+.field {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink);
+  font-size: var(--text-base);
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.field:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-100);
+}
+.field::placeholder {
+  color: var(--slate);
+  opacity: 0.7;
+}
+
+/* ---------- Emblemas semânticos (só progresso = verde, só destaque = amarelo) ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+}
+.badge--progress {
+  background: var(--green-50);
+  color: var(--green);
+  border: 1px solid rgba(22, 163, 74, 0.18);
+}
+.badge--highlight {
+  background: var(--yellow-50);
+  color: #a16207;
+  border: 1px solid rgba(234, 179, 8, 0.25);
+}
+.badge--neutral {
+  background: var(--blue-50);
+  color: var(--blue-dark);
+  border: 1px solid var(--blue-100);
+}
+
+/* ---------- Movimento ---------- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.6s var(--ease) both; }
+
+@keyframes drawPath {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes nodeIn {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.35); opacity: 0; }
+}
+
+@keyframes dotBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+@keyframes checkDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.slide-in { animation: slideIn 0.35s var(--ease) both; }
+
+@keyframes shimmerSweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(220%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Camada futurista ---------- */
+
+.glow-text {
+  background: linear-gradient(100deg, var(--ink) 10%, var(--blue) 50%, var(--blue-light) 75%, var(--ink) 95%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: glowSweep 7s ease-in-out infinite;
+}
+@keyframes glowSweep {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* malha de pontos ambiente, tipo circuito, bem sutil */
+.mesh-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.mesh-bg::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background-image: radial-gradient(circle, rgba(0, 91, 255, 0.16) 1px, transparent 1.4px);
+  background-size: 28px 28px;
+  animation: meshDrift 40s linear infinite;
+}
+@keyframes meshDrift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-28px, -28px); }
+}
+.mesh-bg .orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  animation: orbFloat 12s ease-in-out infinite;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(24px, -18px) scale(1.08); }
+}
+
+/* halo ao redor de cards no hover, além do lift já existente */
+.card--glow:hover {
+  box-shadow: var(--shadow-md), 0 0 0 1px var(--blue-100), 0 0 30px rgba(0, 91, 255, 0.18);
+}
+
+/* borda com gradiente animado — usada em destaques (ex: card do Avi) */
+.border-flow {
+  position: relative;
+  isolation: isolate;
+}
+.border-flow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--angle, 0deg), var(--blue-light), var(--blue), var(--yellow), var(--blue-light));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  animation: rotateBorder 5s linear infinite;
+  opacity: 0.65;
+}
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes rotateBorder {
+  to { --angle: 360deg; }
+}
+
+/* varredura de brilho usada em botões primários e barras de progresso */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  animation: shimmerSweep 3.2s ease-in-out infinite;
+}
+
+.chip-glow {
+  box-shadow: 0 0 0 1px var(--blue-100), 0 0 18px rgba(0, 91, 255, 0.22);
+}
+
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+.scanline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, rgba(0, 91, 255, 0.06), transparent);
+  animation: scanMove 5s ease-in-out infinite;
+}
+@keyframes scanMove {
+  0% { top: -40%; }
+  100% { top: 100%; }
+}

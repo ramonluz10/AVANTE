@@ -1,0 +1,47 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify:
+    name: Verify build before deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm ci
+
+      - name: Start backend smoke test
+        working-directory: backend
+        run: node src/server.js & sleep 5
+
+  deploy:
+    name: Trigger external deployment webhook
+    needs: verify
+    runs-on: ubuntu-latest
+    if: ${{ secrets.DEPLOY_WEBHOOK_URL != '' }}
+    steps:
+      - name: Call deployment webhook
+        env:
+          DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
+        run: |
+          curl -fsSL -X POST "$DEPLOY_WEBHOOK_URL"

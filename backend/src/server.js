@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import crypto from 'node:crypto';
 import express from 'express';
+import compression from 'compression';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
@@ -13,6 +14,7 @@ import authRoutes from './security/authentication/authRoutes.js';
 
 const app = express();
 const port = process.env.PORT || 4000;
+app.set('trust proxy', 1);
 const groqApiKey = process.env.GROQ_API_KEY;
 const geminiApiKey = process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY;
 const activeProvider = groqApiKey ? 'groq' : geminiApiKey ? 'gemini' : 'fallback';
@@ -28,6 +30,7 @@ const allowedOrigins = [
 ].filter(Boolean);
 
 app.disable('x-powered-by');
+app.use(compression());
 app.use(
   helmet({
     contentSecurityPolicy: false,
@@ -77,6 +80,17 @@ app.use('/api/auth', authRoutes);
 
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', service: 'avante-backend', aviConfigured: providerConfigured, provider: activeProvider });
+});
+
+app.use((err, _req, res, _next) => {
+  console.error('Unhandled error:', err?.message || err);
+  res.status(err?.statusCode || 500).json({
+    success: false,
+    error: {
+      code: 'INTERNAL_SERVER_ERROR',
+      message: 'Ocorreu um erro interno no servidor.'
+    }
+  });
 });
 
 app.get('/api/dashboard', (_req, res) => {

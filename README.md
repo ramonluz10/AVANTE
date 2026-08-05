@@ -64,6 +64,31 @@ avante/
 4. Siga Clean Architecture e SOLID onde fizer sentido — sem complexidade desnecessária.
 5. Abra PRs pequenas e objetivas, usando o template em `.github/PULL_REQUEST_TEMPLATE.md`.
 
+## Deploy e produção
+
+A arquitetura recomendada para produção é:
+
+- Frontend em Vercel
+- Backend em Railway
+- Banco PostgreSQL em Railway
+- GitHub como repositório e trigger de CI/CD
+
+### Fluxo recomendado
+
+```text
+git push
+  ↓
+GitHub
+  ↓
+Vercel publica o frontend
+  ↓
+Railway publica o backend
+  ↓
+PostgreSQL permanece sincronizado via Railway / Prisma
+```
+
+Para o roteiro completo de publicação, consulte [docs/deploy-producao.md](docs/deploy-producao.md) e [docs/checklist-producao.md](docs/checklist-producao.md).
+
 ## Status
 
 🚧 Em desenvolvimento — Fase MVP (ver `docs/roadmap.md`).

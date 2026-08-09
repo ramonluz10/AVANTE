@@ -35,12 +35,25 @@ jobs:
         run: node src/server.js & sleep 5
 
   deploy:
-    name: Trigger external deployment webhook
+    name: Deploy frontend
     needs: verify
     runs-on: ubuntu-latest
-    if: ${{ secrets.DEPLOY_WEBHOOK_URL != '' }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to Vercel
+        if: ${{ secrets.VERCEL_TOKEN != '' && secrets.VERCEL_ORG_ID != '' && secrets.VERCEL_PROJECT_ID != '' }}
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+          working-directory: frontend
+
       - name: Call deployment webhook
+        if: ${{ secrets.VERCEL_TOKEN == '' && secrets.DEPLOY_WEBHOOK_URL != '' }}
         env:
           DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
         run: |

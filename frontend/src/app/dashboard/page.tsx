@@ -48,7 +48,7 @@ export default function DashboardPage() {
 
   return (
     <main className="container" style={{ paddingTop: 40, paddingBottom: 70 }}>
-      <section style={{ display: 'grid', gridTemplateColumns: '1.3fr 0.7fr', gap: 20 }}>
+      <section className="dashboard-grid" style={{ display: 'grid', gridTemplateColumns: '1.3fr 0.7fr', gap: 20 }}>
         <div className="card fade-up" style={{ padding: 30 }}>
           <span className="eyebrow">painel</span>
           <h1 style={{ fontSize: 26, margin: '12px 0 10px' }}>Seu plano inteligente de estudos</h1>
@@ -65,7 +65,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="card fade-up" style={{ padding: 24, animationDelay: '0.08s' }}>
+        <div className="card fade-up dashboard-summary" style={{ padding: 24, animationDelay: '0.08s' }}>
           <span className="eyebrow">resumo do dia</span>
           <div style={{ fontSize: 34, fontWeight: 800, marginTop: 10, fontFamily: 'var(--font-mono)' }}>
             {doneCount}/{tasks.length}

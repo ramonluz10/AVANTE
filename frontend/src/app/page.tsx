@@ -41,6 +41,7 @@ export default function HomePage() {
 
       <section className="container" style={{ paddingTop: 64, paddingBottom: 40 }}>
         <div
+          className="home-hero"
           style={{
             display: 'grid',
             gridTemplateColumns: '1.05fr 0.95fr',
@@ -84,7 +85,7 @@ export default function HomePage() {
       </section>
 
       <section className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+        <div className="home-pills" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
           {pillars.map((pillar, i) => (
             <div
               key={pillar.title}
@@ -100,7 +101,7 @@ export default function HomePage() {
 
       <section className="container" style={{ paddingBottom: 64 }}>
         <div
-          className="card fade-up"
+          className="card fade-up home-spotlight"
           style={{
             padding: '36px 40px',
             display: 'grid',

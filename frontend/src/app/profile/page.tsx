@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import RitmoPath from '../components/RitmoPath';
 
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const BASE_PATH = repoName ? `/${repoName}` : '';
+const withBasePath = (path: string) => `${BASE_PATH}${path.startsWith('/') ? path : `/${path}`}`;
+
 const conquistas = ['7 dias seguidos', 'Meta batida', 'Primeira conversa com Avi'];
 
 export default function ProfilePage() {
@@ -40,7 +44,7 @@ export default function ProfilePage() {
         </div>
 
         <div style={{ marginTop: 26 }}>
-          <Link href="/dashboard" className="btn btn-primary">
+          <Link href={withBasePath('/dashboard')} className="btn btn-primary">
             Voltar ao painel
           </Link>
         </div>

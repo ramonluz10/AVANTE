@@ -45,6 +45,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <header
+        className="site-header"
         style={{
           position: 'sticky',
           top: 0,
@@ -71,10 +72,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           }}
         />
         <div
-          className="container"
-          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 14, paddingBottom: 14, gap: 20 }}
+          className="container site-header-top"
+          style={{ paddingTop: 14, paddingBottom: 14 }}
         >
-          <Link href={withBasePath('/')} style={{ display: 'flex', alignItems: 'center', gap: 11, fontWeight: 800, fontSize: 19, letterSpacing: '-0.01em', color: 'var(--ink)' }}>
+          <Link className="site-header-brand" href={withBasePath('/')} style={{ display: 'flex', alignItems: 'center', gap: 11, fontWeight: 800, fontSize: 19, letterSpacing: '-0.01em', color: 'var(--ink)' }}>
             <Image
               src={withBasePath('/avante-logomark.png')}
               alt=""
@@ -88,6 +89,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
           <nav
             ref={navRef}
+            className="site-header-nav"
             style={{
               position: 'relative',
               display: 'flex',
@@ -138,7 +140,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             })}
           </nav>
 
-          <Link href={withBasePath('/auth')} className="btn btn-primary" style={{ padding: '10px 18px' }}>
+          <Link href={withBasePath('/auth')} className="btn btn-primary site-header-login" style={{ padding: '10px 18px' }}>
             Entrar
           </Link>
         </div>

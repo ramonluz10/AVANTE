@@ -27,7 +27,7 @@ export default function AuthPage() {
   useEffect(() => {
     const stored = sessionStorage.getItem('avante-auth');
     if (stored) {
-      router.replace('/dashboard');
+      router.replace(withBasePath('/dashboard'));
     }
   }, [router]);
 
@@ -46,7 +46,7 @@ export default function AuthPage() {
 
       sessionStorage.setItem('avante-auth', JSON.stringify({ name, email }));
       setMessage('Conta criada com sucesso. Redirecionando para o painel...');
-      router.push('/dashboard');
+      router.push(withBasePath('/dashboard'));
       return;
     }
 
@@ -56,7 +56,7 @@ export default function AuthPage() {
     }
 
     sessionStorage.setItem('avante-auth', JSON.stringify({ email }));
-    router.push('/dashboard');
+    router.push(withBasePath('/dashboard'));
   };
 
   const handleSocialClick = async (provider: string) => {
@@ -67,7 +67,7 @@ export default function AuthPage() {
       }
 
       setMessage('Redirecionando para o Google...');
-      await signIn('google', { callbackUrl: '/dashboard' });
+      await signIn('google', { callbackUrl: withBasePath('/dashboard') });
       return;
     }
 
@@ -79,7 +79,7 @@ export default function AuthPage() {
   return (
     <main className="container" style={{ paddingTop: 56, paddingBottom: 80 }}>
       <div
-        className="card fade-up"
+        className="card fade-up auth-card"
         style={{ padding: 40, maxWidth: 460, margin: '0 auto' }}
       >
         <Image

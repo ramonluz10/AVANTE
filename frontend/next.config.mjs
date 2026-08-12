@@ -1,3 +1,7 @@
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isGithubPages = Boolean(repoName);
+const basePath = isGithubPages ? `/${repoName}` : '';
+
 const securityHeaders = [
   {
     key: 'X-Content-Type-Options',
@@ -20,6 +24,9 @@ const securityHeaders = [
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  trailingSlash: true,
+  basePath,
+  assetPrefix: isGithubPages ? `/${repoName}` : undefined,
   images: {
     unoptimized: true
   },

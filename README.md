@@ -1,5 +1,7 @@
 # AVANTE
 
+![Deploy frontend to GitHub Pages](https://github.com/ramonluz10/AVANTE/actions/workflows/static.yml/badge.svg)
+
 **Um passo de cada vez.**
 
 Avante é uma plataforma inteligente de planejamento e acompanhamento de estudos, criada para ajudar estudantes a estudarem melhor, criarem constância e evoluírem profissionalmente.

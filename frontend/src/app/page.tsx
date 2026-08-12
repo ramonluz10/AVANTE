@@ -2,6 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import RitmoPath from './components/RitmoPath';
 
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const BASE_PATH = repoName ? `/${repoName}` : '';
+const withBasePath = (path: string) => `${BASE_PATH}${path.startsWith('/') ? path : `/${path}`}`;
+
 const pillars = [
   {
     title: 'Plano que se ajusta a você',
@@ -54,10 +58,10 @@ export default function HomePage() {
               se torne algo sustentável, não mais uma fonte de ansiedade.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <Link href="/auth" className="btn btn-primary shimmer">
+              <Link href={withBasePath('/auth')} className="btn btn-primary shimmer">
                 Comece agora
               </Link>
-              <Link href="/dashboard" className="btn btn-secondary">
+              <Link href={withBasePath('/dashboard')} className="btn btn-secondary">
                 Ver o painel
               </Link>
             </div>
@@ -129,7 +133,7 @@ export default function HomePage() {
               }}
             />
             <Image
-              src="/avi-mascot.png"
+              src={withBasePath('/avi-mascot.png')}
               alt="Avi, o mascote e mentor de estudos do Avante"
               fill
               style={{ objectFit: 'contain', filter: 'drop-shadow(0 10px 16px rgba(10,29,61,0.16))' }}
@@ -142,7 +146,7 @@ export default function HomePage() {
               Ele acompanha seu progresso, sugere o próximo passo e comemora cada conquista —
               sempre no seu ritmo, nunca com pressão. O Avi orienta; quem estuda é você.
             </p>
-            <Link href="/avi" className="btn btn-primary" style={{ marginTop: 16 }}>
+            <Link href={withBasePath('/avi')} className="btn btn-primary" style={{ marginTop: 16 }}>
               Conversar com o Avi
             </Link>
           </div>
@@ -167,7 +171,7 @@ export default function HomePage() {
             <h3 style={{ color: 'var(--white)', fontSize: 24, marginBottom: 8 }}>Pronto para dar o próximo passo?</h3>
             <p style={{ color: 'var(--blue-100)', fontSize: 15 }}>Leva menos de um minuto para começar.</p>
           </div>
-          <Link href="/auth" className="btn" style={{ background: 'var(--white)', color: 'var(--blue-dark)' }}>
+          <Link href={withBasePath('/auth')} className="btn" style={{ background: 'var(--white)', color: 'var(--blue-dark)' }}>
             Criar minha conta
           </Link>
         </div>

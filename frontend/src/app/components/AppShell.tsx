@@ -5,11 +5,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const BASE_PATH = repoName ? `/${repoName}` : '';
+const withBasePath = (path: string) => `${BASE_PATH}${path.startsWith('/') ? path : `/${path}`}`;
+
 const navItems = [
-  { href: '/', label: 'Início' },
-  { href: '/dashboard', label: 'Painel' },
-  { href: '/avi', label: 'Avi' },
-  { href: '/profile', label: 'Perfil' }
+  { href: withBasePath('/'), label: 'Início' },
+  { href: withBasePath('/dashboard'), label: 'Painel' },
+  { href: withBasePath('/avi'), label: 'Avi' },
+  { href: withBasePath('/profile'), label: 'Perfil' }
 ];
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
@@ -26,7 +30,11 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    const el = navRef.current?.querySelector<HTMLAnchorElement>(`a[href="${pathname}"]`);
+    const currentPath = pathname || '/';
+    const normalizedPath = currentPath.startsWith('/') ? currentPath : `/${currentPath}`;
+    const targetPath = withBasePath(normalizedPath);
+    const el = navRef.current?.querySelector<HTMLAnchorElement>(`a[href="${targetPath}"]`);
+
     if (el) {
       setIndicator({ left: el.offsetLeft, width: el.offsetWidth, opacity: 1 });
     } else {
@@ -66,9 +74,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           className="container"
           style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 14, paddingBottom: 14, gap: 20 }}
         >
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 11, fontWeight: 800, fontSize: 19, letterSpacing: '-0.01em', color: 'var(--ink)' }}>
+          <Link href={withBasePath('/')} style={{ display: 'flex', alignItems: 'center', gap: 11, fontWeight: 800, fontSize: 19, letterSpacing: '-0.01em', color: 'var(--ink)' }}>
             <Image
-              src="/avante-logomark.png"
+              src={withBasePath('/avante-logomark.png')}
               alt=""
               width={48}
               height={40}
@@ -130,7 +138,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             })}
           </nav>
 
-          <Link href="/auth" className="btn btn-primary" style={{ padding: '10px 18px' }}>
+          <Link href={withBasePath('/auth')} className="btn btn-primary" style={{ padding: '10px 18px' }}>
             Entrar
           </Link>
         </div>

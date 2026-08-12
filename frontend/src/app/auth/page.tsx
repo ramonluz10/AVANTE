@@ -12,6 +12,10 @@ const socialProviders = [
   { name: 'GitHub', accent: '#24292f' }
 ];
 
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const BASE_PATH = repoName ? `/${repoName}` : '';
+const withBasePath = (path: string) => `${BASE_PATH}${path.startsWith('/') ? path : `/${path}`}`;
+
 export default function AuthPage() {
   const router = useRouter();
   const [mode, setMode] = useState<'login' | 'register'>('login');
@@ -79,7 +83,7 @@ export default function AuthPage() {
         style={{ padding: 40, maxWidth: 460, margin: '0 auto' }}
       >
         <Image
-          src="/avante-logomark.png"
+          src={withBasePath('/avante-logomark.png')}
           alt="Avante"
           width={72}
           height={60}

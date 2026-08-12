@@ -6,6 +6,9 @@ import { useEffect, useRef, useState } from 'react';
 
 type Message = { id: number; from: 'user' | 'avi'; text: string };
 
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const BASE_PATH = repoName ? `/${repoName}` : '';
+const withBasePath = (path: string) => `${BASE_PATH}${path.startsWith('/') ? path : `/${path}`}`;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
 function LunaAvatar({ size = 44, thinking = false }: { size?: number; thinking?: boolean }) {
@@ -32,7 +35,7 @@ function LunaAvatar({ size = 44, thinking = false }: { size?: number; thinking?:
         }}
       >
         <Image
-          src="/avi-mascot.png"
+          src={withBasePath('/avi-mascot.png')}
           alt="Avi"
           width={size * 2}
           height={size * 2}
@@ -182,7 +185,7 @@ export default function AviPage() {
       </div>
 
       <div style={{ textAlign: 'center', marginTop: 20 }}>
-        <Link href="/dashboard" className="btn btn-secondary">
+        <Link href={withBasePath('/dashboard')} className="btn btn-secondary">
           Voltar ao painel
         </Link>
       </div>

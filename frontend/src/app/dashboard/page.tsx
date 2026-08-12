@@ -6,6 +6,10 @@ import RitmoPath from '../components/RitmoPath';
 
 type Task = { id: number; title: string; time: string; completed: boolean };
 
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const BASE_PATH = repoName ? `/${repoName}` : '';
+const withBasePath = (path: string) => `${BASE_PATH}${path.startsWith('/') ? path : `/${path}`}`;
+
 const initialTasks: Task[] = [
   { id: 1, title: 'Revisar matemática', time: '09:00', completed: true },
   { id: 2, title: 'Leitura de biologia', time: '15:00', completed: false },
@@ -52,10 +56,10 @@ export default function DashboardPage() {
             Você está indo bem. O plano de hoje foi ajustado para manter a calma e o ritmo.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 20 }}>
-            <Link href="/avi" className="btn btn-primary">
+            <Link href={withBasePath('/avi')} className="btn btn-primary">
               Falar com Avi
             </Link>
-            <Link href="/profile" className="btn btn-secondary">
+            <Link href={withBasePath('/profile')} className="btn btn-secondary">
               Meu perfil
             </Link>
           </div>
@@ -76,7 +80,7 @@ export default function DashboardPage() {
       <section className="card fade-up" style={{ padding: 24, marginTop: 20, animationDelay: '0.14s' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
           <span className="eyebrow">seu ritmo</span>
-          <Link href="/profile" style={{ fontSize: 13, color: 'var(--blue)', fontWeight: 600 }}>
+          <Link href={withBasePath('/profile')} style={{ fontSize: 13, color: 'var(--blue)', fontWeight: 600 }}>
             ver histórico completo →
           </Link>
         </div>

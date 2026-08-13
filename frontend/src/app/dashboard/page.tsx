@@ -6,7 +6,7 @@ import RitmoPath from '../components/RitmoPath';
 
 type Task = { id: number; title: string; time: string; completed: boolean };
 
-const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1]?.toLowerCase() ?? '';
 const BASE_PATH = repoName ? `/${repoName}` : '';
 const withBasePath = (path: string) => `${BASE_PATH}${path.startsWith('/') ? path : `/${path}`}`;
 

@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 
 type Message = { id: number; from: 'user' | 'avi'; text: string };
 
-const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1]?.toLowerCase() ?? '';
 const BASE_PATH = repoName ? `/${repoName}` : '';
 const withBasePath = (path: string) => `${BASE_PATH}${path.startsWith('/') ? path : `/${path}`}`;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';

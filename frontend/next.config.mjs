@@ -1,4 +1,4 @@
-const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1]?.toLowerCase() ?? '';
 const basePath = repoName ? `/${repoName}` : '';
 
 const securityHeaders = [
